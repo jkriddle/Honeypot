@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="1826c9b3-f924-4405-acbc-27d4c9138939" name="Mark Kamberger@MARKKAMBERGER 2012-09-27 11:32:03" runUser="MarkKamberger\Mark Kamberger" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="c7c5e10b-4d63-4c10-a02e-edc9a676e24f">
+    <Deployment runDeploymentRoot="Mark Kamberger_MARKKAMBERGER 2012-09-27 11_32_03">
+      <DeploymentItem filename="D:\Projects\MVCTemplate\CarFareCompare\Src\Plugin.Demo\bin\Plugin.Demo.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-09-27T11:32:03.1520079-04:00" queuing="2012-09-27T11:32:08.9003367-04:00" start="2012-09-27T11:32:09.2163548-04:00" finish="2012-09-27T11:32:11.2884733-04:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="Index" storage="d:\projects\mvctemplate\carfarecompare\src\plugin.demo.tests\bin\debug\plugin.demo.tests.dll" id="7df95020-7bee-dbce-893b-92de11ca119a">
+      <Execution id="c25abb82-7dc5-4960-871c-dbbd02729758" />
+      <TestMethod codeBase="D:/Projects/MVCTemplate/CarFareCompare/Src/Plugin.Demo.Tests/bin/Debug/Plugin.Demo.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Plugin.Demo.Tests.Controllers.HomeControllerTest, Plugin.Demo.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Index" />
+    </UnitTest>
+    <UnitTest name="About" storage="d:\projects\mvctemplate\carfarecompare\src\plugin.demo.tests\bin\debug\plugin.demo.tests.dll" id="e1f7d9c0-7027-014a-3b13-a3531b0bf799">
+      <Execution id="50427da9-d40b-4186-8821-e4f5efe14052" />
+      <TestMethod codeBase="D:/Projects/MVCTemplate/CarFareCompare/Src/Plugin.Demo.Tests/bin/Debug/Plugin.Demo.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="Plugin.Demo.Tests.Controllers.HomeControllerTest, Plugin.Demo.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="About" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="7df95020-7bee-dbce-893b-92de11ca119a" executionId="c25abb82-7dc5-4960-871c-dbbd02729758" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e1f7d9c0-7027-014a-3b13-a3531b0bf799" executionId="50427da9-d40b-4186-8821-e4f5efe14052" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="c25abb82-7dc5-4960-871c-dbbd02729758" testId="7df95020-7bee-dbce-893b-92de11ca119a" testName="Index" computerName="MARKKAMBERGER" duration="00:00:00.1914946" startTime="2012-09-27T11:32:09.4283669-04:00" endTime="2012-09-27T11:32:11.1194636-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c25abb82-7dc5-4960-871c-dbbd02729758">
+    </UnitTestResult>
+    <UnitTestResult executionId="50427da9-d40b-4186-8821-e4f5efe14052" testId="e1f7d9c0-7027-014a-3b13-a3531b0bf799" testName="About" computerName="MARKKAMBERGER" duration="00:00:00.0002929" startTime="2012-09-27T11:32:11.1234639-04:00" endTime="2012-09-27T11:32:11.1274641-04:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50427da9-d40b-4186-8821-e4f5efe14052">
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,23 @@
+﻿<div id="userProfileTemplate" style="display:none;">
+    <div class="row">
+        <div class="span2">
+            <img src="/Image/View/{{Id}}?Type=User&MaxWidth=150&MaxHeight=200" alt="" />
+        </div>
+        <div class="span3">
+            <h1>{{FullName}}</h1>
+            
+            <hr />
+            <strong>Company Information</strong>
+            <ul class="unstyled">
+                <li><em>Name:</em> {{CompanyDba}}</li>
+                <li><em>Phone:</em> {{ReservationPhoneNumber}}</li>
+
+                {{#CompanyWebsite}}
+                    <li><em>Website:</em> <a href="{{CompanyWebsite}}">{{CompanyWebsite}}</a></li>
+                {{/CompanyWebsite}}
+                
+                <li><a class="company" href="#{{CompanyId}}">Company Profile</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

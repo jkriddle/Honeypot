@@ -1,0 +1,41 @@
+﻿@model CFC.Web.Mvc.Models.User.UserListViewModel
+
+@{
+    ViewBag.Title = "Manage Users";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="contentWrapper">
+    <div id="pageHeader">
+        <h2>Manage Users</h2>
+        <form id="userSearch" class="searchBar">
+            <input id="userTerm" class="searchField" type="text" /><button class="searchSubmit" type="submit"></button>
+        
+            <div class="message"></div>
+
+            <div class="searchActions">
+                <a href="#" id="add" class="button">Add a User</a>
+            </div>
+
+        </form>
+    </div>
+    
+    <span id="fixedHeaderAdjustment"></span>
+    
+
+    <div id="userList" class="grid scrollable">
+        <div class="more">
+            <div class="circle"></div>
+            <div class="circle1"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    CFC.Load.Controller('user', function() {
+        var c = new UserController();
+        c.List();
+    });
+
+    CFC.ActiveNav('users');
+</script>

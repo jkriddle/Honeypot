@@ -1,0 +1,92 @@
+﻿@model CFC.Web.Mvc.Models.User.EditProfileViewModel
+
+@{
+    ViewBag.Title = "Edit Profile";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="contentWrapper">
+    
+    <div class="page">
+        <h2>Edit Profile</h2>
+
+        <form action="#/edit" method="post" id="editPanel">
+        
+            <fieldset>
+                <div class="message"></div>
+        
+                <ul>
+                    <li class="full">
+                        <label class="required">Name</label>
+                        <span class="label">
+                            <label for="FirstName" class="inline">First Name</label>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "required" })
+                        </span>
+
+                        <span class="label">
+                            <label for="LastName" class="inline">Last Name</label>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "required" })
+                        </span>
+                    </li>
+
+                    <li>
+                        <label>Email</label>
+                        @Html.TextBoxFor(m => m.Email, new { @class="required" })
+                    </li>
+                    
+                    <li>
+                        <label>State</label>
+                       @Html.DropDownList("State", Model.StateList)
+                    </li>
+
+                    <li class="last">
+                        <label>Cell Phone</label>
+                        @Html.TextBoxFor(m => m.CellPhone, new { @class = "phone" })
+                    </li>
+    
+                    <li class="full">
+                        <label>Password</label>
+                        <a id="editpass" href="#">Edit Password</a>
+        
+                        <span id="editPasswordPanel" style="display:none;">
+                            <span class="label">
+                                <label for="Password" class="inline">Password</label>
+                                @Html.PasswordFor(m => m.Password)
+                            </span>
+            
+                            <span class="label">
+                                <label for="ConfirmPassword" class="inline">Confirm Password</label>
+                                @Html.PasswordFor(m => m.ConfirmPassword)
+                            </span>
+                        </span>
+                    </li>
+                
+                    <li>
+                        <label>Service Distance</label>
+                        @Html.TextBoxFor(m => m.ServiceAreaDistance)
+                        <span class="note">Number of miles around your company that trip requests will appear on your dashboard by default.</span>
+                    </li>
+
+                    <li>
+                        <label>Bid Threshold</label>
+                        @Html.TextBoxFor(m => m.BidThreshold, new { @class = "required" })
+                        <span class="note">Trips that have a low bid less than this amount will not be displayed on your dashboard.</span>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <p class="actions">
+                @Html.ActionLink("Back to Profile", "Profile", null, new { @class = "cancel" })
+                @Html.Button("Submit", "Save", HtmlButtonType.Submit, null, new { @class = "ui-button-primary submit" })
+            </p>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    CFC.Load.Controller('user', function () {
+        var c = new UserController();
+        c.EditProfile();
+    });
+</script>

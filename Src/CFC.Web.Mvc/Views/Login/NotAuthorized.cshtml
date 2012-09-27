@@ -1,0 +1,16 @@
+﻿@model CFC.Web.Mvc.Models.Login.FacebookAuthInputModel
+
+@{
+    ViewBag.Title = "Not Authorized";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contentWrapper">
+
+    <h2>Not Authorized</h2>
+    
+    <p>We were unable to sign you in using Facebook. Please try again.</p>
+    
+    <p>Reason: @Model.ErrorDescription</p>
+
+</div>

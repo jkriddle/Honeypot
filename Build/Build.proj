@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Run" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- *********************  CONFIGURATION *************************  -->
+  <PropertyGroup>
+      <Environment>Development</Environment>
+      <Major>1</Major>
+      <Minor>0</Minor>
+      <Build>0</Build>
+      <Revision>1</Revision>
+
+      <SolutionName>CFC</SolutionName>
+
+      <!-- Paths -->
+      <CheckoutRoot>E:\CI\CarFareCompare\Checkout\$(Environment)</CheckoutRoot>
+      <BuildPath>$(CheckoutRoot)\BuildSystem</BuildPath>
+      <WebAppPath>$(CheckoutRoot)\Src\$(SolutionName).Web.Mvc</WebAppPath>
+      <DropsPath>$(CheckoutRoot)\Drops\</DropsPath>
+
+      <!-- MS Deploy Tranforation/Setup -->
+      <MSDeployPath>C:\Program Files\IIS\Microsoft Web Deploy V2\msdeploy.exe</MSDeployPath>
+
+      <TransformInputFile>$(WebAppPath)\Web.config</TransformInputFile>
+      <TransformFile>$(WebAppPath)\Web.$(Environment).config</TransformFile>
+      <TransformOutputFile>$(CheckoutRoot)\Drops\Web.$(Environment).config</TransformOutputFile>
+
+      <MaintenanceWebFilePath>$(WebAppPath)\Maintenance.htm</MaintenanceWebFilePath>
+      <MaintenanceWebConfigPath>$(WebAppPath)\Maintenance.config</MaintenanceWebConfigPath>
+
+      <!--SQL Backup Configuration-->
+      <SQLBackup>Scripts\SQLBackup.sql</SQLBackup>
+      <ConnectionString>Server=.\MSSQL2008;Initial Catalog=CarFareCompare;Integrated Security=True</ConnectionString> 
+      <BackupDirectory>C:\Backup\Deploy\</BackupDirectory>
+
+      <!-- Folder to place all scripts that will be run when deployed -->
+      <SQLScripts>Scripts\Deploy\*.sql</SQLScripts>
+
+  </PropertyGroup>
+
+  <!-- MS Deploy -->
+  <PropertyGroup Condition="'$(Environment)' == 'Development'">
+    <ServerApplicationRoot>e:\inetpub\sites\dev.cfc.theriddlebrothers.net</ServerApplicationRoot>
+    <AppName>dev.cfc.theriddlebrothers.net</AppName>
+    <DeployServerName>https://atlantis.theriddlebrothers.net:8172/MsDeploy.axd?Site=$(AppName)</DeployServerName>
+    <ServerUsername>Administrator</ServerUsername>
+    <ServerPassword>AtlantismbMC5hC32</ServerPassword>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Environment)' == 'QA'">
+    <ServerApplicationRoot>e:\inetpub\sites\staging.cfc.theriddlebrothers.net</ServerApplicationRoot>
+    <AppName>staging.cfc.theriddlebrothers.net</AppName>
+    <DeployServerName>https://atlantis.theriddlebrothers.net:8172/MsDeploy.axd?Site=$(AppName)</DeployServerName>
+    <ServerUsername>Administrator</ServerUsername>
+    <ServerPassword>AtlantismbMC5hC32</ServerPassword>
+  </PropertyGroup>
+
+
+  <!-- *********************  END CONFIGURATION *************************  -->
+
+
+  <!-- Imports -->
+  <Import Project="$(CheckoutRoot)\BuildSystem\BuildSystem.proj" />
+  <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+
+
+  <Target Name="Run">
+    <CallTarget Targets="UpdateAssemblies" />
+    <CallTarget Targets="Package" />
+    <CallTarget Targets="MergeConfig" />
+    <CallTarget Targets="BackupSQL" />
+    <CallTarget Targets="RunSQLScripts" />
+    <CallTarget Targets="DeployOfflinePage" />
+    <CallTarget Targets="DeployToServer" />
+    <CallTarget Targets="RemoveOfflinePage" />
+  </Target>
+
+
+  <!-- Update assembly with version number -->
+  <Target Name="UpdateAssemblies">
+    <FileUpdate Files="$(CheckoutRoot)\Common\AssemblyVersion.cs"
+       Regex="(\d+)\.(\d+)\.(\d+)\.(\d+)"
+       ReplacementText="$(Major).$(Minor).$(Build).$(Revision)" />
+  </Target>
+
+
+  <!-- Configure the web.config file for this environment -->
+  <Target Name="MergeConfig">
+    <MakeDir Directories="$(OutputFolder)" Condition="!Exists('$(OutputFolder)')" />
+    <XmlMassUpdate
+          ContentFile="$(TransformInputFile)"
+          ContentRoot="/configuration"
+          SubstitutionsFile="$(TransformFile)"
+          SubstitutionsRoot="/configuration"
+          MergedFile="$(TransformOutputFile)" />
+  </Target>
+
+
+  <!-- Clean source folders -->
+  <Target Name="Clean">
+    <ItemGroup>
+      <BinFiles Include="..\$(SolutionName)\bin\*.*;..\$(SolutionName)\obj\*.*" />
+    </ItemGroup>
+    <Delete Files="@(BinFiles)" />
+  </Target>
+  
+  <Target Name="Package">
+    <MSBuild Projects="$(CheckoutRoot)\Src\$(SolutionName).sln"
+             Properties="Platform=Any Cpu;
+              Configuration=Release;
+              DeployOnBuild=True;
+              DeployTarget=Package;
+              DeployIisAppPath=$(AppName);
+              PackageLocation=$(DropsPath)\$(SolutionName).zip;"/>
+  </Target>
+
+
+  <!-- Backup database -->
+  <Target Name="BackupSQL" DependsOnTargets="MergeConfig">
+    <MakeDir Directories="$(BackupDirectory)" ContinueOnError="true"/>
+    <ExecuteDDL ConnectionString="$(ConnectionString)" Files="$(SQLBackup)" ContinueOnError="false"/>
+  </Target>
+
+
+  <!-- Run new SQL scripts in Deploy directory -->
+  <ItemGroup>
+    <DeployScripts Include="$(SQLScripts)"/>
+  </ItemGroup>
+  
+  <Target Name="RunSQLScripts" 
+          DependsOnTargets="BackupSQL" >
+
+    <Message Text="Running SQL Scripts: $(DeployScripts)"></Message>
+
+    <ExecuteDDL ConnectionString="$(ConnectionString)" Files="@(DeployScripts)" ContinueOnError="false"/>
+
+  </Target>
+
+
+
+  <!-- Deploy to server(s) -->
+  <Target Name="DeployOfflinePage">
+    <Exec Command="&quot;$(MSDeployPath)&quot; -source:filePath=&quot;$(MaintenanceWebFilePath)&quot; -dest:filePath=$(ServerApplicationRoot)\Maintenance.htm,computerName='$(DeployServerName)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -verb:sync" />
+
+    <Exec Command="&quot;$(MSDeployPath)&quot; -source:filePath=&quot;$(MaintenanceWebConfigPath)&quot; -dest:filePath=$(ServerApplicationRoot)\Web.config,computerName='$(DeployServerName)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -verb:sync" />
+  </Target>
+
+  <Target Name="DeployToServer">
+    <Exec Command="&quot;$(MSDeployPath)&quot; -source:package='$(CheckoutRoot)\Drops\$(SolutionName).zip' -dest:auto,computerName='$(DeployServerName)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -skip:objectName=filePath,skipAction=Delete,absolutePath=Maintenance.htm -skip:objectName=filePath,skipAction=Delete,absolutePath=Web.config -verb:sync" ContinueOnError="false" />
+
+    <Exec Command="&quot;$(MSDeployPath)&quot; -source:filePath=&quot;$(TransformOutputFile)&quot; -dest:filePath=$(ServerApplicationRoot)\Web.config,computerName='$(DeployServerName)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -verb:sync" />
+  </Target>
+
+  <Target Name="RemoveOfflinePage">
+    <Exec Command="&quot;$(MSDeployPath)&quot; -dest:filePath=$(ServerApplicationRoot)\Maintenance.htm,computerName='$(DeployServerName)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -verb:delete" />
+    <Exec Condition="'$(Environment)' == 'Production'" Command="&quot;$(MSDeployPath)&quot; -dest:filePath=$(ServerApplicationRoot)\Maintenance.htm,computerName='$(DeployServerName2)',username=$(ServerUsername),password=$(ServerPassword),authType=basic -allowUntrusted=true -verb:delete" />
+  </Target>
+
+</Project>

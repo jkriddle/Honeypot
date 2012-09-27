@@ -1,0 +1,48 @@
+﻿@model CFC.Web.Mvc.Models.Login.ResetPasswordViewModel
+
+@{
+    ViewBag.Title = "Reset Password";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="contentWrapper">
+
+    <h2>Reset Password</h2>
+    
+    <form action="#/reset" method="post" id="resetPanel">
+        @Html.HiddenFor(m => m.Token)
+        
+        <div id="resetMessage" class="message"></div>
+
+        <fieldset>
+        
+            <ul>
+                <li class="full">
+                    <label>New Password</label>
+                    <span class="label">
+                        <label for="ResetPassword" class="inline">Password</label>
+                        @Html.Password("Password", null, new { @id = "ResetPassword" })
+                    </span>
+            
+                    <span class="label">
+                        <label for="ResetConfirmPassword" class="inline">Confirm Password</label>
+                        @Html.Password("ConfirmPassword", null, new { @id = "ResetConfirmPassword" })
+                    </span>
+                </li>
+            </ul>
+
+        </fieldset>
+        
+        <p class="actions">
+            @Html.Button("ResetSubmit", "Reset Password", HtmlButtonType.Submit, null, new { @class = "ui-button-primary submit" })
+        </p>
+    </form>
+
+</div>
+
+<script type="text/javascript">
+    CFC.Load.Controller('login', function () {
+        var c = new LoginController();
+        c.Reset();
+    });
+</script>

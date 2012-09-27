@@ -1,0 +1,19 @@
+﻿@model CFC.Web.Mvc.Models.Utility.UtilityViewModel
+
+<div id="utility">
+    @if (Model.IsLoggedIn)
+    {
+        @Html.ActionLink(Model.Email, "Profile", "User", new { @id = Model.UserId }, new { @id = "userEmail" })
+        <text> | </text>
+        @Html.ActionLink("Logout", "Index", "Logout", null, null)
+        if (Model.IsEmulatedSession)
+        {
+            <text> | </text>
+            @Html.ActionLink("Back to Admin", "Return", "User", null, null)
+        }
+    }
+    else
+    {
+        <a id="login" href="#/login">Sign In</a>
+    }
+</div>

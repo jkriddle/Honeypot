@@ -1,0 +1,38 @@
+﻿@model CFC.Web.Mvc.Models.Page.PageListViewModel
+       
+@{
+    ViewBag.Title = "Site Content";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="contentWrapper">
+    <div id="toolbar">
+        <form id="pageSearch" class="searchBar">
+            <input id="pageTerm" class="searchField" type="text" /><button class="searchSubmit" type="submit"></button>
+        </form>
+    </div>
+    
+    <span id="fixedHeaderAdjustment"></span>
+
+    <div id="pageList" class="grid scrollable">
+        @foreach(var page in Model.Pages)
+        {
+            <div class="item pageItem" style="height:80px;">
+                <div class="inner">
+		
+	                <div class="itemLeft">
+                    <h1>@page.Name</h1>
+		                <ul>
+			                <li><span>Title:</span>@page.Title</li>
+		                </ul>
+	                </div>
+	  
+                    <div class="actions">
+                        <p style="float:right">@Html.ActionLink("Edit", "Edit", new { @id = page.Id }, new { @class="greenButton" })</p>
+                    </div>
+                </div>
+                </div>
+        }
+    </div>
+
+</div>

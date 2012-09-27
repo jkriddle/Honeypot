@@ -1,0 +1,71 @@
+﻿@model CFC.Web.Mvc.Models.Page.PageViewModel
+
+@{
+    ViewBag.Title = "Edit Page";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="formWrapper contentWrapper">
+    
+    <div class="rounded">
+        
+        <form action="#/edit" method="post" id="editPanel" >
+            @Html.HiddenFor(m => m.Id)
+        
+            <div class="blockTitle">
+                <h3>Edit Content</h3>
+            </div>
+            
+            <div class="message"></div>
+
+            <fieldset>
+        
+                <ul>
+                    <li class="full last">
+                        <label for="title">Title</label>
+                        @Html.TextBoxFor(m => m.Title)
+                        <span class="note">Title is only used if the content is used for a full page.</span>
+                    </li>
+
+                    <li class="full last">
+                        <label>Content</label>
+                       
+                        @Html.TextAreaFor(m => m.Content, new { @class="long" })
+                        <span class="note">Use the <img src="@Url.Content("~/Content/img/paste_from_word.png")" alt="Paste from Word" /> button when pasting content from Microsoft Word.</span>
+                    </li>
+                </ul>
+            </fieldset>
+
+            <p class="actions">
+                @Html.ActionLink("Back to Content List", "List", null, new { @class = "cancel" })
+                @Html.Button("Submit", "Save", HtmlButtonType.Submit, null, new { @class = "ui-button-primary submit" })
+            </p>
+
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="@Url.Content("~/Content/js/ckeditor/ckeditor.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/js/ckeditor/adapters/jquery.js")"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var panel = '#editPanel';
+
+        // Submit login information
+        $(panel).submit(function (e) {
+            e.preventDefault();
+            var params = $(this).serialize();
+            params.Content = $('#Content').val();
+            $.post(CFC.Url('Page/Edit'), params, function (data) {
+                var vm = new ResponseModel(data);
+                CFC.ShowMessage(panel, vm.Message, vm.Errors);
+            }, 'json');
+        });
+
+        $('#Content').ckeditor({
+            toolbar: 'CFCToolbar',
+            height: '500px'
+        });
+    });
+</script>

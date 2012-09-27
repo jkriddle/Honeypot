@@ -1,0 +1,21 @@
+﻿@model CFC.Web.Mvc.Models.User.ProfileViewModel
+
+@{
+    ViewBag.Title = @Model.FullName;
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="contentWrapper">
+    
+    <div class="page">
+        <h2>@Model.FullName</h2>
+    
+        <p>Email: @Model.Email</p>
+
+        @if (Model.CanEdit)
+        {
+            @Html.ActionLink("Edit Profile", "EditProfile", null, new { @class = "button" })
+        }
+    </div>
+
+</div>

@@ -1,0 +1,20 @@
+﻿@model CFC.Web.Mvc.Models.User.UserListViewModel
+
+@foreach (var user in Model.Users)
+{
+    <div class="row">
+        <div class="content">
+            <h4><a href="/User/Profile/@user.Id">@user.FullName</a></h4>
+      
+	        <p>@user.RoleName</p>
+	        <p>@user.Email</p>
+	  
+	        <p><a href="/User/Emulate/@user.Id">Sign In as @user.FullName</a></p>
+        </div>
+    </div>
+}
+
+@if (!Model.HasMorePages)
+{
+    <input type="hidden" id="noMoreUserPages" value="1" />
+}
