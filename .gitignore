@@ -2,7 +2,6 @@
 ###################
 *.com
 *.class
-
 *.exe
 *.pdb
 *.dll.config
@@ -11,6 +10,9 @@
 *.vsmdi
 testimpactdata.sdf
 *.user
+*.ldf
+*.mdf
+*.coverage
 
 # Include dlls if they’re in the NuGet packages directory
 !/packages/*/lib/*.dll
@@ -25,11 +27,12 @@ _UpgradeReport_Files/
 
 # Directories #
 ###############
-bin/
-obj/
-Debug/
-Release/
-Drops/
+bin
+obj
+Debug
+Release
+Drops
+TestResults
 
 # Web publish log #
 ###################

@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyCompany("Car Fare Compare")]
-[assembly: AssemblyProduct("Car Fare Compare")]
-[assembly: AssemblyCopyright("Copyright (c) Car Fare Compare 2012")]
+[assembly: AssemblyCompany("The Riddle Brothers")]
+[assembly: AssemblyProduct("Honeypot")]
+[assembly: AssemblyCopyright("Copyright (c) The Riddle Brothers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

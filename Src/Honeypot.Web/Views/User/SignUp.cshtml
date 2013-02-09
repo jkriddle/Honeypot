@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="signUpForm" class="form-horizontal">
+    <fieldset>
+        <legend>Signup</legend>
+        
+        <p>All fields are required.</p>
+
+        <div class="alert display-none"></div>
+
+        <div class="control-group">
+            <label class="control-label" for="inputEmail">Email</label>
+            <div class="controls">
+                <input type="text" name="Email" placeholder="Email address">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="inputPassword">Password</label>
+            <div class="controls">
+                <input type="password" name="Password" placeholder="Password">
+                    
+                <input type="password" name="ConfirmPassword" placeholder="Confirm Password">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+@section scripts {
+    <script type="text/javascript">
+        ($(function () {
+
+            var form = $('#signUpForm');
+            var alertPanel = $('.alert', form);
+
+            var user = new User();
+            
+            // Login success
+            user.subscribe(user.MESSAGE_SIGNUP, function (resp) {
+                if(resp.Success) {
+                    var redirect = Honeypot.QueryString.ReturnUrl
+                        || '@Url.Action("Index", "Dashboard", new { })';
+                    window.location.href = redirect;
+                } else {
+                    alertPanel.hide().html(resp.Errors.join('<br />'))
+                        .removeClass('alert-info').addClass('alert-error').fadeIn();
+                }
+            });
+
+            // Handle form submission
+            form.submit(function (e) {
+                e.preventDefault();
+                var formData = $(this).serializeObject();
+                user.signUp(formData);
+            });
+        }));
+    </script>
+} 

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Template>
+  <Message>
+    <![CDATA[
+    {{Body}}
+    <br />
+    - <a href="http://www.honeypot.com">Honeypot</a>
+  ]]>
+  </Message>
+</Template>

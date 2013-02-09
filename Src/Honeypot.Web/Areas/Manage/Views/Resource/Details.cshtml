@@ -1,0 +1,113 @@
+﻿@using Honeypot.Web.Helpers
+@{
+   
+    ViewBag.Title = "Manage Resources";
+}
+
+<div id="content-header">
+    <h1>Resources</h1>
+</div>
+
+<div id="breadcrumb">
+    <a href="@Url.Action("Index", "Dashboard")" class="tip-bottom" data-original-title="Go to Home">
+        <i class="icon-home"></i> Home
+    </a>
+    @Html.ActionLink("Resources", "Index", "Resource")
+    <a href="#" class="current">View</a>
+</div>
+
+<div class="container-fluid">
+    <form id="viewResourceForm" action="#" method="post" class="row-fluid">
+        <div class="span12">
+             
+            <div class="alert display-none"></div>
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-align-justify"></i>									
+                    </span>
+                    <h5>View Resource</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    
+                </div>
+            </div>
+
+        </div>	
+    </form>
+</div>
+
+<script id="resourceDetailsTemplate" type="text/html">
+    <div class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Resource ID</label>
+            <div class="controls">
+                <span class="form-value">{{ResourceId}}</span>
+            </div>
+        </div>
+                        
+        <div class="control-group">
+            <label class="control-label">Name</label>
+            <div class="controls">
+                <span class="form-value">{{Name}}</span>
+            </div>
+        </div>
+                        
+        <div class="control-group">
+            <label class="control-label">Category</label>
+            <div class="controls">
+                <span class="form-value">{{Category}}</span>
+            </div>
+        </div>
+                        
+        <div class="control-group">
+            <label class="control-label">Type</label>
+            <div class="controls">
+                <span class="form-value">{{Type}}</span>
+            </div>
+        </div>
+                        
+        <div class="control-group">
+            <label class="control-label">Value</label>
+            <div class="controls">
+                <span class="form-value">{{Value}}</span>
+            </div>
+        </div>
+                        
+        <div class="control-group">
+            <label class="control-label">Read Only?</label>
+            <div class="controls">
+                <span class="form-value">
+                    {{#if IsReadOnly}}Yes{{/if}}
+                    {{#unless IsReadOnly}}Yes{{/unless}}
+                </span>
+            </div>
+        </div>
+    </div>
+</script>
+
+@section scripts {
+    <script type="text/javascript">
+        ($(function () {
+            
+            var id = Honeypot.QueryString.id;
+            var resourceForm = $('#viewResourceForm');
+            var message = $('.alert', resourceForm);
+            var resource = new Resource();
+            
+            // Show overlay
+            $('.widget-content', resourceForm).form('overlay');
+            
+            resource.subscribe(resource.MESSAGE_RETRIEVED, function (resp) {
+                var html = Honeypot.Template('#resourceDetailsTemplate', resp);
+                $('.widget-content', resourceForm).html(html);
+                $('.widget-content', resourceForm).form('overlay-hide');
+            });
+
+            // Load resource
+            resource.getOne(id);
+
+        }));
+    </script>
+} 

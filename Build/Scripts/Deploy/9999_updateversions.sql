@@ -1,4 +1,0 @@
--- Just a placeholder for Builds
---
--- SQL scripts should be named to begin with the next highest number so they are run
--- in order.

@@ -1,0 +1,128 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    @Styles.Render("~/Bundles/Styles/core")
+    @Styles.Render("~/Bundles/Styles/plugins")
+    @Styles.Render("~/Bundles/Styles/app")
+    @Styles.Render("~/Bundles/Styles/manage")
+</head>
+<body>
+
+    <div id="header">
+        <h1><a href="#">Honeypot</a></h1>
+    </div>
+
+    <!--<div id="search">
+        <input type="text" placeholder="Search here...">
+        <button type="submit" class="tip-right" data-original-title="Search"><i class="icon-search icon-white"></i></button>
+    </div>-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav btn-group">
+            <li class="btn btn-inverse"><a title="" href="@Url.Action("EditProfile", "User", new { @area = "" })"><i class="icon icon-user"></i><span class="text">Profile</span></a></li>
+            <!--<li class="btn btn-inverse dropdown" id="menu-messages"><a href="http://wbpreview.com/previews/WB0F35928/#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i><span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a class="sAdd" title="" href="http://wbpreview.com/previews/WB0F35928/#">new message</a></li>
+                    <li><a class="sInbox" title="" href="http://wbpreview.com/previews/WB0F35928/#">inbox</a></li>
+                    <li><a class="sOutbox" title="" href="http://wbpreview.com/previews/WB0F35928/#">outbox</a></li>
+                    <li><a class="sTrash" title="" href="http://wbpreview.com/previews/WB0F35928/#">trash</a></li>
+                </ul>
+            </li>
+            <li class="btn btn-inverse"><a title="" href="http://wbpreview.com/previews/WB0F35928/#"><i class="icon icon-cog"></i><span class="text">Settings</span></a></li>-->
+            <li class="btn btn-inverse">
+                <a id="signout" href="@Url.Action("SignOut", "User", new { @area = "" })">
+                    <i class="icon icon-share-alt"></i><span class="text">Sign Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="sidebar">
+        <a href="@Url.Action("Index", "Dashboard")" class="visible-phone">
+            <i class="icon icon-home"></i>Dashboard
+        </a>
+        <ul style="display: block;">
+            <li class="@NavHelper.ActiveClass(Url.Action("Index", "Dashboard"))">
+                <a href="@Url.Action("Index", "Dashboard")">
+                    <i class="icon icon-home"></i> <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="@NavHelper.ActiveClass(Url.Action("Index", "User"))">
+                <a href="@Url.Action("Index", "User")">
+                    <i class="icon icon-user"></i> <span>Users</span>
+                </a>
+            </li>
+            <li class="@NavHelper.ActiveClass(Url.Action("Index", "Resource"), "open") submenu">
+                <a href="#">
+                    <i class="icon icon-file"></i>
+                    <span>Resources</span>
+                </a>
+                <ul>
+                    <li>
+                       @Html.ActionLink("Content", "Index", "Resource", new { @Category = "Content" }, null)
+                    </li>
+                    <li>
+                        @Html.ActionLink("Settings", "Index", "Resource", new { @Category = "Settings" }, null)
+                    </li>
+                </ul>
+            </li>
+            <li class="@NavHelper.ActiveClass(Url.Action("Index", "Log"))">
+                <a href="@Url.Action("Index", "Log")">
+                    <i class="icon icon-list-alt"></i> <span>Logs</span>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+
+    <ul class="typeahead dropdown-menu"></ul>
+    
+    @Html.Partial("JsPartials")
+    
+    
+    @Scripts.Render("~/Bundles/Scripts/core")
+    @Scripts.Render("~/Bundles/Scripts/plugins")
+    @Scripts.Render("~/Bundles/Scripts/app")
+    @Scripts.Render("~/Bundles/Scripts/manage")
+
+    <!-- Scripts 
+    <script src="@Url.Content("~/Content/js/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/date.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.ui.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.livequery.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.serializeObject.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.dataTables.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.uniform.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.select2.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.cookie.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/jquery.form.js")"></script>
+    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/bootbox.custom.js")"></script>
+    <script src="@Url.Content("~/Content/js/handlebars.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/datepicker/bootstrap-datepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/daterangepicker/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/Content/js/plugins/toggle-buttons/jquery.toggle.buttons.js")"></script>
+    
+
+    <script src="@Url.Content("~/Content/js/app/app.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/api.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/user.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/log.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/resource.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/datatable.js")"></script>
+    <script src="@Url.Content("~/Content/js/app/init.js")"></script>
+    <script src="@Url.Content("~/Content/js/admin.js")"></script>-->
+    
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

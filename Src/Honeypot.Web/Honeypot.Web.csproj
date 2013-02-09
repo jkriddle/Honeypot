@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{39613BA0-1206-4A4B-A16A-C1F2A22D1267}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Honeypot.Web</RootNamespace>
+    <AssemblyName>Honeypot.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Build\Signing\Pipeline.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <UseIISExpress>false</UseIISExpress>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\Solutions\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\..\Packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\Packages\AutoMapper.2.2.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\Castle.Core.3.1.0\lib\net40-client\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\Castle.Windsor.3.1.0\lib\net40\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator.WindsorAdapter">
+      <HintPath>..\..\Packages\CommonServiceLocator.WindsorAdapter.1.0\lib\NET35\CommonServiceLocator.WindsorAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core">
+      <HintPath>..\..\Packages\dotless.1.3.0.4\lib\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.3.0.727, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\FluentNHibernate.1.3.0.727\lib\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\Packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc">
+      <HintPath>..\..\Packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=3.0.100.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\MvcContrib.Mvc3-ci.3.0.100.0\lib\MvcContrib.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib.FluentHtml, Version=3.0.100.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\MvcContrib.Mvc3.FluentHtml-ci.3.0.100.0\lib\MvcContrib.FluentHtml.dll</HintPath>
+    </Reference>
+    <Reference Include="NetTopologySuite, Version=1.7.3.17298, Culture=neutral, PublicKeyToken=f580a05016ebada1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\NetTopologySuite.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.0.8.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\Newtonsoft.Json.4.5.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch.Domain, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\SharpArch.Domain.2.0.4\lib\NET40\SharpArch.Domain.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch.NHibernate, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\SharpArch.NHibernate.2.0.4\lib\NET40\SharpArch.NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch.Web.Mvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\Packages\SharpArch.Web.Mvc.Castle.2.0.4\lib\NET40\SharpArch.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\..\Packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\Packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivator, Version=1.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Packages\WebActivator.1.5.2\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\..\Packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Common\AssemblyVersion.cs">
+      <Link>Properties\AssemblyVersion.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
+      <Link>Properties\CommonAssemblyInfo.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\LessTransform.cs" />
+    <Compile Include="Areas\Api\ApiAreaRegistration.cs" />
+    <Compile Include="Areas\Api\Controllers\BaseApiController.cs" />
+    <Compile Include="Areas\Api\Controllers\ResourceController.cs" />
+    <Compile Include="Areas\Api\Controllers\LogController.cs" />
+    <Compile Include="Areas\Api\Controllers\UserController.cs" />
+    <Compile Include="Areas\Api\Models\Resource\Input\UpdateResourceInputModel.cs" />
+    <Compile Include="Areas\Api\Models\Resource\Input\ResourceListInputModel.cs" />
+    <Compile Include="Areas\Api\Models\Resource\View\ResourceListViewModel.cs" />
+    <Compile Include="Areas\Api\Models\Resource\View\ResourceViewModel.cs" />
+    <Compile Include="Areas\Api\Models\Log\Input\LogListInputModel.cs" />
+    <Compile Include="Areas\Api\Models\Log\View\LogListViewModel.cs" />
+    <Compile Include="Areas\Api\Models\Log\View\LogViewModel.cs" />
+    <Compile Include="Areas\Api\Models\PagedInputModel.cs" />
+    <Compile Include="Areas\Api\Models\BaseResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\PagedViewModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\ResetPasswordInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\ForgotPasswordInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\SignUpInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\UpdateUserInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\SignInInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\Input\UserListInputModel.cs" />
+    <Compile Include="Areas\Api\Models\User\View\AuthResponseModel.cs" />
+    <Compile Include="Areas\Api\Models\User\View\UserListViewModel.cs" />
+    <Compile Include="Areas\Api\Models\User\View\UserViewModel.cs" />
+    <Compile Include="Areas\Manage\Controllers\BaseManageController.cs" />
+    <Compile Include="Areas\Manage\Controllers\ResourceController.cs" />
+    <Compile Include="Areas\Manage\Controllers\UserController.cs" />
+    <Compile Include="Areas\Manage\Controllers\LogController.cs" />
+    <Compile Include="Areas\Manage\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
+    <Compile Include="Attributes\ApiAuthAttribute.cs" />
+    <Compile Include="Attributes\NoCacheAttribute.cs" />
+    <Content Include="Areas\Manage\Views\Web.config" />
+    <Content Include="Areas\Manage\Views\Dashboard\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Api\Views\Web.config" />
+    <Content Include="Areas\Manage\Views\Log\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\User\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Log\Details.cshtml" />
+    <Content Include="Areas\Manage\Views\User\Details.cshtml" />
+    <Content Include="Areas\Manage\Views\Resource\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Resource\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Resource\Details.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\JsPartials.cshtml" />
+    <None Include="Content\css\app\public.less" />
+    <Content Include="Content\css\app\admin-brand.css">
+      <DependentUpon>admin-brand.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\admin-brand.min.css">
+      <DependentUpon>admin-brand.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\admin.css" />
+    <Content Include="Content\css\app\app.css">
+      <DependentUpon>public.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\app.min.css">
+      <DependentUpon>public.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\public.css">
+      <DependentUpon>public.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\public.min.css">
+      <DependentUpon>public.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\bootstrap-responsive.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <None Include="Content\css\app\admin-brand.less" />
+    <Content Include="Content\notifications\PasswordReset.xml" />
+    <Content Include="Content\notifications\Email.xml" />
+    <Content Include="Content\notifications\ForgotPassword.xml" />
+    <Content Include="Content\img\breadcrumb.png" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\menu-active.png" />
+    <Content Include="Content\img\spinner.gif" />
+    <Content Include="Content\js\app\core\observable.js" />
+    <Content Include="Content\js\plugins\select2\select2.png" />
+    <Content Include="Content\js\plugins\toggle-buttons\bootstrap.toggle.buttons.css" />
+    <Content Include="Content\js\plugins\toggle-buttons\jquery.toggle.buttons.js" />
+    <Content Include="Content\js\plugins\daterangepicker\daterangepicker.css" />
+    <Content Include="Content\js\plugins\jquery-ui\jquery.ui.custom.css" />
+    <Content Include="Content\js\plugins\select2\select2.css" />
+    <Content Include="Content\css\app\shared.css">
+      <DependentUpon>shared.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\app\shared.min.css">
+      <DependentUpon>shared.less</DependentUpon>
+    </Content>
+    <Content Include="Content\img\glyphicons-halflings-white.png" />
+    <Content Include="Content\img\glyphicons-halflings.png" />
+    <Content Include="Content\js\manage.js" />
+    <Content Include="Content\js\app\core\api.js" />
+    <Content Include="Content\js\init.js" />
+    <Content Include="Content\js\app\resource.js" />
+    <Content Include="Content\js\app\log.js" />
+    <Content Include="Content\js\app\datatable.js" />
+    <Content Include="Content\js\app\user.js" />
+    <Compile Include="Attributes\RequiresAuthenticationAttribute.cs" />
+    <Compile Include="Attributes\RequiresRole.cs" />
+    <Compile Include="Bootstrap\AutoMapperBootstrap.cs" />
+    <Compile Include="Bootstrap\ComponentRegistrar.cs" />
+    <Compile Include="Bootstrap\RouteRegistrar.cs" />
+    <Content Include="Content\js\date.js" />
+    <Content Include="Content\js\handlebars.js" />
+    <Content Include="Content\js\plugins\datepicker\bootstrap-datepicker.js" />
+    <Content Include="Content\js\plugins\datepicker\datepicker.css">
+      <DependentUpon>datepicker.less</DependentUpon>
+    </Content>
+    <Content Include="Content\js\plugins\datepicker\datepicker.min.css">
+      <DependentUpon>datepicker.less</DependentUpon>
+    </Content>
+    <Content Include="Content\js\plugins\daterangepicker\daterangepicker.js" />
+    <Content Include="Content\js\plugins\jquery.form.js" />
+    <Content Include="Content\js\plugins\jquery.livequery.js" />
+    <Content Include="Content\js\public.js" />
+    <Content Include="Content\js\app\core\inheritance.js" />
+    <Compile Include="Bootstrap\WindsorCompositionRoot.cs" />
+    <Compile Include="Bootstrap\WindsorScopeContainer.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Helpers\HtmlPager.cs" />
+    <Compile Include="Helpers\JsonHelper.cs" />
+    <Compile Include="Helpers\NavHelper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Helpers\StateListHelper.cs" />
+    <Compile Include="Helpers\UrlHelper.cs" />
+    <Compile Include="Models\EnumViewModel.cs" />
+    <Compile Include="Models\JsonResponseModel.cs" />
+    <Compile Include="Models\User\View\EditProfileViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ISessionProvider.cs" />
+    <Compile Include="Providers\SessionProvider.cs" />
+    <Compile Include="Resources\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BaseViewModel.cs" />
+    <Compile Include="Models\BaseInputModel.cs" />
+    <Compile Include="Models\PagedInputModel.cs" />
+    <Compile Include="Providers\FormsAuthWrapper.cs" />
+    <Compile Include="Providers\IAuth.cs" />
+    <Compile Include="Providers\UserMembershipProvider.cs" />
+    <Compile Include="Providers\UserRoleProvider.cs" />
+    <Compile Include="Models\PagedViewModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Wrappers\ModelStateWrapper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\app\core\app.js" />
+    <Content Include="Content\js\plugins\bootbox.custom.js" />
+    <Content Include="Content\js\plugins\jquery.cookie.js" />
+    <Content Include="Content\js\plugins\select2\jquery.select2.js" />
+    <Content Include="Content\js\plugins\jquery.serializeObject.js" />
+    <Content Include="Content\js\plugins\jquery-ui\jquery.ui.custom.js" />
+    <Content Include="Maintenance.htm" />
+    <Content Include="Content\js\bootstrap.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\User\SignIn.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
+    <Content Include="Content\css\app\admin-main.css" />
+    <Content Include="Content\css\app\manage.less" />
+    <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="Views\User\SignUp.cshtml" />
+    <Content Include="Content\css\app\shared.less" />
+    <Content Include="Content\js\plugins\datepicker\datepicker.less" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
+    <None Include="Web.Production.config" />
+    <None Include="Maintenance.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Development.config" />
+    <Content Include="Web.QA.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NHibernate.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Common\General.cshtml" />
+    <Content Include="Views\Common\HttpStatus404.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Api\Views\Shared\" />
+    <Folder Include="Areas\Manage\Models\" />
+    <Folder Include="Models\User\Input\" />
+    <Folder Include="Models\User\Response\" />
+    <Folder Include="Models\_Template\Input\" />
+    <Folder Include="Models\_Template\Response\" />
+    <Folder Include="Models\_Template\View\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Honeypot.Domain\Honeypot.Domain.csproj">
+      <Project>{8def56cd-601e-443c-9dce-c4ec54c0b6a6}</Project>
+      <Name>Honeypot.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Honeypot.Infrastructure\Honeypot.Infrastructure.csproj">
+      <Project>{9544d94b-9b6e-4b61-8a09-88382205bf86}</Project>
+      <Name>Honeypot.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Honeypot.Services\Honeypot.Services.csproj">
+      <Project>{c9aac14b-e695-4508-83b7-acb8fc5a7284}</Project>
+      <Name>Honeypot.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <ProjectExtensions>
+    <!--<VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>20949</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://brent.cfcremote.com:20591/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>-->
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>8291</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

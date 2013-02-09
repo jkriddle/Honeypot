@@ -1,0 +1,116 @@
+﻿@using Honeypot.Domain
+@using Honeypot.Web.Helpers
+@{
+   
+    ViewBag.Title = "Manage Users";
+}
+
+<div id="content-header">
+    <h1>Users</h1>
+</div>
+
+<div id="breadcrumb">
+    <a href="@Url.Action("Index", "Dashboard")" class="tip-bottom" data-original-title="Go to Home">
+        <i class="icon-home"></i> Home
+    </a>
+    @Html.ActionLink("Users", "Index", "User")
+    <a href="#" class="current">Edit</a>
+</div>
+
+<div class="container-fluid">
+    <form id="editUserForm" action="#" method="post" class="row-fluid">
+        <div class="span12">
+             
+            <div class="alert display-none"></div>
+
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-align-justify"></i>									
+                    </span>
+                    <h5>Edit User</h5>
+                </div>
+                <div class="widget-content nopadding">
+                </div>
+            </div>
+
+        </div>	
+    </form>
+</div>
+
+<script id="editUserTemplate" type="text/html">
+    <div class="form-horizontal">
+        <input type="hidden" name="UserId" value="{{UserId}}" />
+        <div class="control-group">
+            <label class="control-label">Email</label>
+            <div class="controls">
+                <input name="Email" type="text" placeholder="Email address" value="{{Email}}">
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Password</label>
+            <div class="controls form-inline">
+                <input name="Password" type="password" class="inline" placeholder="Password">
+                <input name="ConfirmPassword" type="password" class="inline" placeholder="Confirm password">
+                <span class="help-block">Leave blank to keep current password.</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Role</label>
+            <div class="controls">
+               {{> roleList}}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</script>
+
+
+@section scripts {
+    <script type="text/javascript">
+        ($(function () {
+            
+            var id = Honeypot.QueryString.id;
+            var userForm = $('#editUserForm');
+            var message = $('.alert', userForm);
+            var user = new User();
+            
+            // Show overlay
+            $('.widget-content', userForm).form('overlay');
+            
+            user.subscribe(user.MESSAGE_RETRIEVED, function (resp) {
+                var html = Honeypot.Template('#editUserTemplate', resp);
+                $('.widget-content', userForm).html(html);
+                $('.widget-content', userForm).form('overlay-hide');
+            });
+            
+            user.subscribe(user.MESSAGE_UPDATEPROFILE, function (resp) {
+                if (resp.Success) {
+                    message.hide().removeClass('alert-error')
+                    .addClass('alert-success').html('User has been saved.').fadeIn();
+                } else {
+                    message.hide().removeClass('alert-success')
+                    .addClass('alert-error').html(resp.Errors.join('<br />')).fadeIn();
+                }
+                userForm.form('enable');
+            });
+
+            // Load user
+            user.getOne(id);
+
+            // Submit form
+            userForm.submit(function (e) {
+                e.preventDefault();
+                userForm.form('disable');
+                var formData = userForm.serializeObject();
+                user.update(formData);
+            });
+
+        }));
+    </script>
+} 

@@ -1,0 +1,104 @@
+﻿@{
+   
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form id="signInForm" class="form-signin">
+    <h2 class="form-signin-heading">Please sign in</h2>
+
+    <div class="alert display-none"></div>
+
+    <input type="text" class="input-block-level" placeholder="Email address" name="Email" />
+    <input type="password" class="input-block-level" placeholder="Password" name="Password" />
+    <label class="checkbox">
+        <input type="checkbox" value="true" name="RememberMe" /> Remember me
+    </label>
+    <button class="btn btn-large btn-primary pull-right" type="submit">Sign in</button> 
+    <a class="btn btn-link btn-cancel" href="#">Forgot Password?</a>
+</form>
+
+<form id="forgotForm" class="form-signin display-none">
+    <h3 class="form-signin-heading">Forgot your password?</h3>
+
+    <div class="alert display-none"></div>
+    
+    <p>Enter your email address and we will send you instructions on resetting your password.</p>
+
+    <input type="text" class="input-block-level" placeholder="Email address" name="Email" />
+    <button class="btn btn-large btn-primary pull-right" type="submit">Reset Password</button> 
+    <a class="btn btn-link btn-cancel" href="#">&laquo; Back to Login</a>
+    <div class="clearfix"></div>
+</form>
+
+@section scripts {
+    <script type="text/javascript">
+        ($(function () {
+
+            var message = '@ViewBag.Message';
+            var form = $('#signInForm');
+            var alertPanel = $('.alert', form);
+            
+            var forgotForm = $('#forgotForm');
+            var forgotAlert = $('.alert', forgotForm);
+            var user = new User();
+            
+            // Login success
+            user.subscribe(user.MESSAGE_SIGNIN, function (resp) {
+                if (resp.Success) {
+                    var redirect = Honeypot.QueryString.ReturnUrl
+                    || '@Url.Action("Index", "Dashboard", new { @area="Manage"})';
+                    window.location.href = redirect;
+                } else {
+                    form.form('enable');
+                    alertPanel.hide().html(resp.Errors.join('<br />'))
+                        .removeClass('alert-info').addClass('alert-error').fadeIn();
+                }
+            });
+
+            user.subscribe(user.MESSAGE_FORGOTPASSWORD, function (resp) {
+                if (resp.Success) {
+                    forgotAlert.hide().html('An email has been sent to you with information on resetting your password.')
+                        .removeClass('alert-error').addClass('alert-success').fadeIn();
+                } else {
+                    forgotForm.form('enable');
+                    forgotAlert.hide().html('An account was not found for this email address. <a href="/User/SignUp">Sign up now</a>')
+                        .removeClass('alert-success').addClass('alert-error').fadeIn();
+                }
+            });
+            
+            // Handle messages
+            if (message) {
+                alertPanel.html(message)
+                    .removeClass('alert-error').addClass('alert-info').fadeIn();
+            }
+
+            // Handle login form submission
+            form.submit(function (e) {
+                e.preventDefault();
+                form.form('disable');
+                var formData = $(this).serializeObject();
+                user.signIn(formData.Email, formData.Password, formData.RememberMe);
+            });
+
+            // Forgot password form
+            forgotForm.submit(function (e) {
+                e.preventDefault();
+                forgotForm.form('disable');
+                var formData = $(this).serializeObject();
+                user.forgotPassword(formData.Email);
+            });
+            
+            // Show/hide forgot password
+            $('.btn-cancel', form).click(function () {
+                form.hide();
+                forgotForm.show();
+            });
+            
+            $('.btn-cancel', forgotForm).click(function () {
+                form.show();
+                forgotForm.hide();
+            });
+        }));
+    </script>
+} 
